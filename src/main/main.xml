@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Main">
+	<select id="checkId" parameterType="String" resultType="int">
+		select count( * ) from dn_member where id = #{id}
+	</select>
+	
+	<select id="getMember" parameterType="String" resultType="main.MemberDataBean">
+		select * from dn_member where id = #{id}
+	</select>
+	
+	<insert id="insertMember" parameterType="main.MemberDataBean">
+		insert into dn_member values(SEQ_DN_S_TWO_TWO_ID.nextval,#{id},#{passwd},#{gender},#{age},#{zipcode},#{address},
+									#{addressDetail,jdbcType=VARCHAR},#{location},#{email},#{signupDate},0,0)
+	</insert>
+	
+	<select id="getSurveys" resultType="main.BoardDataBean">
+		select * from dn_board
+	</select>
+	
+	<update id="updateMember" parameterType="main.MemberDataBean">
+		update dn_member set passwd=#{passwd}, age=#{age}, zipcode=#{zipcode}, address=#{address}, addressDetail=#{addressDetail}, email=#{email}, userState=#{userState} where id=#{id}
+	</update>
+</mapper>
